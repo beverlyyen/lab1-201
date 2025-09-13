@@ -1,0 +1,30 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+
+
+  printf("Please enter some text: ");
+  
+  ssize_t number_of_chars;
+  size_t*buffer_size = NULL;
+  char *buffer = NULL;
+
+
+  number_of_chars = getline(&buffer, buffer_size, stdin);
+
+
+
+
+
+
+
+
+
+
+
+}
+
+

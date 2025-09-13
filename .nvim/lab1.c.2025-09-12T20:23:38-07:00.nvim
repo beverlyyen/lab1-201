@@ -1,0 +1,41 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+
+  printf("Please enter some text: ");
+
+  ssize_t number_of_chars;
+  size_t len = 0;
+  char *line = NULL;
+
+  number_of_chars = getline(&line, &len, stdin);
+
+  //&line also pointer to a pointer
+
+  if (number_of_chars == -1) {
+    perror("getline failed");
+    free(line);
+    exit(EXIT_FAILURE);
+  }
+
+  printf("Tokens:\n");
+  const char *delimiter = " ";
+
+  char *save_pointer;
+  char *token;
+
+  token = strtok_r(line, delimiter, &save_pointer);
+
+  while (token != NULL) {
+    printf("  %s\n", token);
+    token = strtok_r(NULL, delimiter, &save_pointer);
+    // pass in &next_pointer so it's a pass-by-pointer (hands off address of
+    // pointer to function, read more in lab1 manual
+  }
+
+  free(line);
+  return EXIT_SUCCESS;
+}
